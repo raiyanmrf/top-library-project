@@ -5,34 +5,30 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>My Library</title>
+    <link rel="stylesheet" href="style.css">
+
 </head>
 
 <body>
     <main>
         <h1>My library</h1>
         <div class="form-div">
-            <form action="" id="add-book"><button type="submit">add new book</button></form>
+            <form action="" id="add-book"><button>Add new book</button></form>
         </div>
+
         <div class="collection">
-            <div class="cards">
+            <ol id="book-list">
+                <li id="">
+                    <strong class="name">The Hobbit</strong>
+                    <span class="author">J R R Tolkein</span>
+                    <small class="page">256 p.</small>
 
-                <div class="card">
-                    <h2 class="name">My Book</h2>
-                    <h3 class="author">john</h3>
-                    <small><span class="total-page">20</span><span> pages</span></small>
-                </div>
-                <div class="card">
-                    <h2 class="name">My Book</h2>
-                    <h3 class="author">john</h3>>
-                    <small><span class="total-page">20</span><span> pages</span></small>
-                </div>
-                <div class="card">
-                    <h2 class="name">My Book</h2>
-                    <h3 class="author">john</h3>
-                    <small><span class="total-page">20</span><span> pages</span></small>
-                </div>
+                    <label for=""><input type="checkbox" name="mark" id=""> Mark as Read </label>
+                    <button class="delete">Delete</button>
+                </li>
 
-            </div>
+
+            </ol>
         </div>
     </main>
 </body>
