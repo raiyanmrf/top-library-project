@@ -59,7 +59,7 @@ li.read {
 label:hover {
   color: blue;
 }
-input[type="checkbox"] {
+.collection input[type="checkbox"] {
   position: relative;
   top: 2px;
 }
@@ -69,16 +69,39 @@ button {
   cursor: pointer;
 }
 
-button:hover {
-  background-color: white;
-}
-
+#toogle-button,
 form button {
-  background-color: rgb(194, 232, 252);
-  color: rgb(0, 78, 96);
+  background-color: #538af7;
+  color: rgb(255, 255, 255);
+  width: fit-content;
+  font-size: 16px !important;
 }
 
 .delete {
   background-color: rgb(250, 214, 220);
   color: rgb(189, 0, 0);
+}
+
+form {
+  margin-block: 10px;
+}
+
+form > * {
+  margin-bottom: 10px;
+}
+
+.form-row {
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+}
+
+.form-row input {
+  width: 500px;
+  padding: 7px;
+  font-size: 15px;
+}
+
+form label {
+  font-size: 16px;
 }
