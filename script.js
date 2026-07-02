@@ -1,5 +1,8 @@
 const myLibrary = [];
 const form = document.querySelector("#add-book");
+const toogleBtn = document.querySelector(".toogle-button");
+const closeBtn = document.querySelector(".close-btn");
+const modal = document.querySelector(".modal");
 
 function Book(id, name, author, page, read) {
   // the constructor...
@@ -42,3 +45,13 @@ function handleFormSubmission(e) {
 
   // console.log(myLibrary);
 }
+
+function handleToggle(e) {
+  e.stopPropagation();
+  modal.classList.toggle("hide");
+}
+
+// toogle modal
+
+toogleBtn.addEventListener("click", handleToggle);
+closeBtn.addEventListener("click", handleToggle);

@@ -14,29 +14,31 @@
     <main>
         <h1>My library</h1>
         <div class="form-div">
-            <button id="toogle-button">Add Book</button>
-            <form id="add-book">
+            <button class="toogle-button">Add Book</button>
 
 
-                <div class="form-row">
-                    <label for="name">Book</label>
-                    <input required placeholder="e.g. The Hobbit" type="text" id="name" name="name">
-                </div>
-                <div class="form-row">
-                    <label for="author">Author</label>
-                    <input required placeholder="e.g. Tolkien" type="text" id="author" name="author">
-                </div>
-                <div class="form-row">
-                    <label for="page">Page</label>
-                    <input id="page" name="Page" placeholder="e.g. 256" type="number" min="1" max="100000">
-                </div>
-                <div>
-                    <label for="read"><input value="1" type="checkbox" name="read" id="read"> Mark as Read </label>
-                    <button type="submit">Save</button>
-                    <button id="cancel">Cancel</button>
-                </div>
+            <div class="modal">
+                <button class="close-btn">X</button>
+                <form id="add-book">
+                    <div class="form-row">
+                        <label for="name">Book</label>
+                        <input required placeholder="e.g. The Hobbit" type="text" id="name" name="name">
+                    </div>
+                    <div class="form-row">
+                        <label for="author">Author</label>
+                        <input required placeholder="e.g. Tolkien" type="text" id="author" name="author">
+                    </div>
+                    <div class="form-row">
+                        <label for="page">Page</label>
+                        <input id="page" name="Page" placeholder="e.g. 256" type="number" min="1" max="100000">
+                    </div>
+                    <div>
+                        <label for="read"><input value="1" type="checkbox" name="read" id="read"> Mark as Read </label>
+                        <button type="submit">Save</button>
 
-            </form>
+                    </div>
+                </form>
+            </div>
         </div>
 
         <div class="collection">

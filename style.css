@@ -69,7 +69,7 @@ button {
   cursor: pointer;
 }
 
-#toogle-button,
+.toogle-button,
 form button {
   background-color: #538af7;
   color: rgb(255, 255, 255);
@@ -80,6 +80,28 @@ form button {
 .delete {
   background-color: rgb(250, 214, 220);
   color: rgb(189, 0, 0);
+}
+
+.modal {
+  position: absolute;
+  z-index: 10;
+  box-shadow: 1px 1px 1px gray;
+  background-color: #afcaff;
+  padding: 15px;
+}
+
+.close-btn {
+  border-radius: 50%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  position: absolute;
+  top: 5px;
+  right: 5px;
+}
+
+.hide {
+  display: none;
 }
 
 form {
