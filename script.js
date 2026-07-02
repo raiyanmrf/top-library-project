@@ -1,4 +1,5 @@
 const myLibrary = [];
+const form = document.querySelector("#add-book");
 
 function Book(id, name, author, page, read) {
   // the constructor...
@@ -19,4 +20,25 @@ function addBookToLibrary(name, author, page = null, read = false) {
   const id = crypto.randomUUID();
   const book = new Book(id, name, author, page, read);
   myLibrary.push(book);
+}
+
+form.addEventListener("submit", handleFormSubmission);
+
+function handleFormSubmission(e) {
+  console.log(e);
+  e.preventDefault();
+
+  const formData = new FormData(form);
+
+  // for (const [key, value] of formData.entries()) {
+  //   console.log(key, value);
+  // }
+  const name = formData.get("name");
+  const author = formData.get("author");
+  const page = formData.get("page") ?? null;
+  const read = formData.get("read") ? true : false;
+
+  addBookToLibrary(name, author, page, read);
+
+  // console.log(myLibrary);
 }
