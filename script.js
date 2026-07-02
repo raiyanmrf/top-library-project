@@ -4,6 +4,10 @@ const toogleBtn = document.querySelector(".toogle-button");
 const closeBtn = document.querySelector(".close-btn");
 const modal = document.querySelector(".modal");
 
+form.addEventListener("submit", handleFormSubmission);
+toogleBtn.addEventListener("click", handleToggle);
+closeBtn.addEventListener("click", handleToggle);
+
 function Book(id, name, author, page, read) {
   // the constructor...
 
@@ -24,8 +28,6 @@ function addBookToLibrary(name, author, page = null, read = false) {
   const book = new Book(id, name, author, page, read);
   myLibrary.push(book);
 }
-
-form.addEventListener("submit", handleFormSubmission);
 
 function handleFormSubmission(e) {
   console.log(e);
@@ -52,6 +54,3 @@ function handleToggle(e) {
 }
 
 // toogle modal
-
-toogleBtn.addEventListener("click", handleToggle);
-closeBtn.addEventListener("click", handleToggle);
