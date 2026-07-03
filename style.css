@@ -52,7 +52,7 @@ li > * {
   margin-inline-end: 5px;
 }
 
-li.read {
+.read {
   color: green;
 }
 

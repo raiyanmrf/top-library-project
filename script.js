@@ -9,6 +9,8 @@ form.addEventListener("submit", handleFormSubmission);
 toogleBtn.addEventListener("click", handleToggle);
 closeBtn.addEventListener("click", handleToggle);
 
+ol.addEventListener("click", handleReadStatus);
+
 function Book(id, name, author, page, read) {
   // the constructor...
 
@@ -45,11 +47,18 @@ function handleFormSubmission(e) {
   const page = formData.get("page") ?? null;
   const read = formData.get("read") ? true : false;
 
+  // store in the array
   addBookToLibrary(id, name, author, page, read);
 
+  // display to book list
   appendToBookList(id, name, author, page, read);
 
+  // hide form
   handleToggle();
+
+  // addEventsToCheckBox(id);
+
+  // addEventsToDeleteBtn(id);
 
   // console.log(myLibrary);
 }
@@ -73,3 +82,31 @@ function appendToBookList(id, name, author, page, read) {
 
   ol.innerHTML += html;
 }
+
+function handleReadStatus(e) {
+  const target = e.target;
+  console.log(target.tagName);
+  const li = target.parentElement.parentElement;
+
+  if (target.tagName === "INPUT") li.classList.toggle("read");
+  else li.remove();
+}
+
+// function addEventsToCheckBox(id) {
+//   const checkbox = document.getElementById("mark-" + id);
+
+//   checkbox.addEventListener("change", () => {
+//     handleReadStatus(id);
+//   });
+// }
+// function addEventsToDeleteBtn(id) {
+//   const li = document.getElementById(id);
+
+//   const btn = li.lastElementChild;
+
+//   console.log(btn);
+
+//   btn.addEventListener("click", (li) => {
+//     li.remove();
+//   });
+// }
