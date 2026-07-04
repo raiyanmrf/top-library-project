@@ -11,13 +11,13 @@ const form = document.querySelector("#add-book");
 const toogleBtn = document.querySelector(".toogle-button");
 const closeBtn = document.querySelector(".close-btn");
 const modal = document.querySelector(".modal");
-const ol = document.querySelector("#book-list");
+const bookList = document.querySelector("#book-list");
 
 document.addEventListener("DOMContentLoaded", handleInitialBookListLoad);
 form.addEventListener("submit", handleFormSubmission);
 toogleBtn.addEventListener("click", handleToggle);
 closeBtn.addEventListener("click", handleToggle);
-ol.addEventListener("click", handleListAction);
+bookList.addEventListener("click", handleListAction);
 
 function Book(id, name, author, page, read) {
   // the constructor...
@@ -88,7 +88,7 @@ function handleToggle() {
 function appendToBookList(book) {
   // console.log(book);
   const { id, name, author, page, read } = book;
-  const html = `<li id="${id}" class="${read ? "read" : ""}">
+  const newItem = `<li id="${id}" class="${read ? "read" : ""}">
                     <strong class="name">${name}</strong>
                     <span class="author">${name}</span>
                     <small class="page">${page ? page + " p" : ""}</small>
@@ -97,11 +97,11 @@ function appendToBookList(book) {
                     <button class="delete">Delete</button>
                 </li>`;
 
-  ol.innerHTML += html;
+  bookList.innerHTML += newItem;
 }
 
 function loadBookList() {
-  ol.innerHTML = "";
+  bookList.innerHTML = "";
 
   for (const obj of myLibrary) {
     appendToBookList(obj);
