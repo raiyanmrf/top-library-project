@@ -1,16 +1,28 @@
-const myLibrary = [];
+let myLibrary = [
+  {
+    id: 1,
+    name: "The Hobbit",
+    author: "tolkien",
+    page: 256,
+    read: false,
+  },
+];
 const form = document.querySelector("#add-book");
 const toogleBtn = document.querySelector(".toogle-button");
 const closeBtn = document.querySelector(".close-btn");
 const modal = document.querySelector(".modal");
 const ol = document.querySelector("#book-list");
 
+document.addEventListener("DOMContentLoaded", handleInitialBookListLoad);
 form.addEventListener("submit", handleFormSubmission);
 toogleBtn.addEventListener("click", handleToggle);
 closeBtn.addEventListener("click", handleToggle);
 
-ol.addEventListener("click", handleReadStatus);
+ol.addEventListener("click", handleListAction);
 
+function handleInitialBookListLoad(e) {
+  appendToBookList(myLibrary[0]);
+}
 function Book(id, name, author, page, read) {
   // the constructor...
 
@@ -25,15 +37,16 @@ function Book(id, name, author, page, read) {
   this.read = read;
 }
 
-function addBookToLibrary(id, name, author, page = null, read = false) {
+function addBookToLibrary(obj) {
   // take params, create a book then store it in the array
 
+  const { id, name, author, page, read } = obj;
   const book = new Book(id, name, author, page, read);
   myLibrary.push(book);
 }
 
 function handleFormSubmission(e) {
-  console.log(e);
+  // console.log(e);
   e.preventDefault();
 
   const formData = new FormData(form);
@@ -47,18 +60,21 @@ function handleFormSubmission(e) {
   const page = formData.get("page") ?? null;
   const read = formData.get("read") ? true : false;
 
+  const obj = {
+    id,
+    name,
+    author,
+    page,
+    read,
+  };
   // store in the array
-  addBookToLibrary(id, name, author, page, read);
+  addBookToLibrary(obj);
 
   // display to book list
-  appendToBookList(id, name, author, page, read);
+  appendToBookList(obj);
 
   // hide form
   handleToggle();
-
-  // addEventsToCheckBox(id);
-
-  // addEventsToDeleteBtn(id);
 
   // console.log(myLibrary);
 }
@@ -69,12 +85,12 @@ function handleToggle() {
 
 // toogle modal
 
-function appendToBookList(id, name, author, page, read) {
+function appendToBookList(book) {
+  const { id, name, author, page, read } = book;
   const html = `<li id="${id}" class="${read ? "read" : ""}">
                     <strong class="name">${name}</strong>
                     <span class="author">${name}</span>
                     <small class="page">${page ? page + " p" : ""}</small>
-
                     <label  for="mark-${id}"><input ${read ? "checked" : ""}  type="checkbox" name="mark-${id}" id="mark-${id}"> Mark as Read
                     </label>
                     <button class="delete">Delete</button>
@@ -83,40 +99,44 @@ function appendToBookList(id, name, author, page, read) {
   ol.innerHTML += html;
 }
 
-function handleReadStatus(e) {
+function handleListAction(e) {
   const target = e.target;
   const tagName = target.tagName;
   // console.log(target.tagName);
 
   if (tagName === "INPUT") {
+    // remove from dom
     // checkbox > label > li
     const li = target.parentElement.parentElement;
     li.classList.toggle("read");
+
+    // remove from array
+    const updateArray = myLibrary.map((obj) => {
+      if (String(obj.id) == String(li.id)) {
+        obj.read == true ? (obj.read = false) : (obj.read = true);
+      }
+      return obj;
+    });
+
+    // avoid mutation
+    myLibrary = updateArray;
+    console.log(myLibrary);
     return;
   }
   if (tagName === "BUTTON") {
+    // remove from dom
     // button > li
     const li = target.parentElement;
     li.remove();
+
+    // remove from the array
+    const updateArray = myLibrary.filter(
+      (obj) => String(obj.id) != String(li.id),
+    );
+
+    // avoid mutation
+    myLibrary = updateArray;
+    // console.log(myLibrary);
     return;
   }
 }
-
-// function addEventsToCheckBox(id) {
-//   const checkbox = document.getElementById("mark-" + id);
-
-//   checkbox.addEventListener("change", () => {
-//     handleReadStatus(id);
-//   });
-// }
-// function addEventsToDeleteBtn(id) {
-//   const li = document.getElementById(id);
-
-//   const btn = li.lastElementChild;
-
-//   console.log(btn);
-
-//   btn.addEventListener("click", (li) => {
-//     li.remove();
-//   });
-// }
