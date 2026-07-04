@@ -17,12 +17,8 @@ document.addEventListener("DOMContentLoaded", handleInitialBookListLoad);
 form.addEventListener("submit", handleFormSubmission);
 toogleBtn.addEventListener("click", handleToggle);
 closeBtn.addEventListener("click", handleToggle);
-
 ol.addEventListener("click", handleListAction);
 
-function handleInitialBookListLoad(e) {
-  appendToBookList(myLibrary[0]);
-}
 function Book(id, name, author, page, read) {
   // the constructor...
 
@@ -45,6 +41,9 @@ function addBookToLibrary(obj) {
   myLibrary.push(book);
 }
 
+function handleInitialBookListLoad(e) {
+  appendToBookList(myLibrary[0]);
+}
 function handleFormSubmission(e) {
   // console.log(e);
   e.preventDefault();
@@ -71,7 +70,8 @@ function handleFormSubmission(e) {
   addBookToLibrary(obj);
 
   // display to book list
-  appendToBookList(obj);
+  // refresh the list
+  loadBookList();
 
   // hide form
   handleToggle();
@@ -86,6 +86,7 @@ function handleToggle() {
 // toogle modal
 
 function appendToBookList(book) {
+  // console.log(book);
   const { id, name, author, page, read } = book;
   const html = `<li id="${id}" class="${read ? "read" : ""}">
                     <strong class="name">${name}</strong>
@@ -99,16 +100,22 @@ function appendToBookList(book) {
   ol.innerHTML += html;
 }
 
+function loadBookList() {
+  ol.innerHTML = "";
+
+  for (const obj of myLibrary) {
+    appendToBookList(obj);
+  }
+}
+
 function handleListAction(e) {
   const target = e.target;
   const tagName = target.tagName;
   // console.log(target.tagName);
 
   if (tagName === "INPUT") {
-    // remove from dom
     // checkbox > label > li
     const li = target.parentElement.parentElement;
-    li.classList.toggle("read");
 
     // remove from array
     const updateArray = myLibrary.map((obj) => {
@@ -120,14 +127,12 @@ function handleListAction(e) {
 
     // avoid mutation
     myLibrary = updateArray;
-    console.log(myLibrary);
-    return;
+    // console.log(myLibrary);
+    // return;
   }
   if (tagName === "BUTTON") {
-    // remove from dom
     // button > li
     const li = target.parentElement;
-    li.remove();
 
     // remove from the array
     const updateArray = myLibrary.filter(
@@ -137,6 +142,9 @@ function handleListAction(e) {
     // avoid mutation
     myLibrary = updateArray;
     // console.log(myLibrary);
-    return;
+    // return;
   }
+
+  // refresh the list
+  loadBookList();
 }
