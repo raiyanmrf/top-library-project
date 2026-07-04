@@ -85,11 +85,21 @@ function appendToBookList(id, name, author, page, read) {
 
 function handleReadStatus(e) {
   const target = e.target;
-  console.log(target.tagName);
-  const li = target.parentElement.parentElement;
+  const tagName = target.tagName;
+  // console.log(target.tagName);
 
-  if (target.tagName === "INPUT") li.classList.toggle("read");
-  else li.remove();
+  if (tagName === "INPUT") {
+    // checkbox > label > li
+    const li = target.parentElement.parentElement;
+    li.classList.toggle("read");
+    return;
+  }
+  if (tagName === "BUTTON") {
+    // button > li
+    const li = target.parentElement;
+    li.remove();
+    return;
+  }
 }
 
 // function addEventsToCheckBox(id) {
