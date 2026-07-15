@@ -19,18 +19,28 @@ toogleBtn.addEventListener("click", handleToggle);
 closeBtn.addEventListener("click", handleToggle);
 bookList.addEventListener("click", handleListAction);
 
-function Book(id, name, author, page, read) {
-  // the constructor...
+// function Book(id, name, author, page, read) {
+//   // the constructor...
 
-  if (!new.target) {
-    throw Error("Invalid calling of this function.");
+//   if (!new.target) {
+//     throw Error("Invalid calling of this function.");
+//   }
+
+//   this.id = id;
+//   this.name = name;
+//   this.author = author;
+//   this.page = page;
+//   this.read = read;
+// }
+
+class Book {
+  constructor(id, name, author, page, read) {
+    this.id = id;
+    this.name = name;
+    this.author = author;
+    this.page = page;
+    this.read = read;
   }
-
-  this.id = id;
-  this.name = name;
-  this.author = author;
-  this.page = page;
-  this.read = read;
 }
 
 function addBookToLibrary(obj) {
